@@ -1,0 +1,51 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: store data to excel deny Story
+  steps:
+  - intent: add_data
+  - action: Form_Info
+  - action: Form{"name":"Form_Info"}
+  - intent: deny
+  - action: utter_goodbye
+
+- story: store data to excel affirm Story
+  steps:
+  - intent: add_data
+  - action: Form_Info
+  - action: Form{"name":"Form_Info"}
+  - intent: affirm
+  - action: action_save_data
+
+- story: fetch info
+  steps:
+  - intent: ask_info{"column":"email","occup":"trainer"}
+  - action: action_fetch_data
